@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Local apps
     "products",
+    "accounts",
     # 3rd Party Libraries
     "rest_framework",
     "rest_framework_simplejwt",
