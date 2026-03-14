@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "products",
     "accounts",
     "cart",
+    "orders",
     # 3rd Party Libraries
     "rest_framework",
     "rest_framework_simplejwt",
