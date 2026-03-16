@@ -1,7 +1,8 @@
-django
-djangorestframework
-django-environ
-psycopg2-binary
-djangorestframework-simplejwt
-drf-spectacular
-gunicorn
+Django==6.0.3
+django-environ==0.13.0
+djangorestframework==3.16.1
+drf-spectacular==0.29.0
+djangorestframework_simplejwt==5.5.1
+gunicorn==25.1.0
+psycopg2-binary==2.9.11
+
