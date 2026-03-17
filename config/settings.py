@@ -122,6 +122,7 @@ REST_FRAMEWORK = {
         # TODO set permission to IsAuthenticated
         "rest_framework.permissions.AllowAny",
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     # TODO add pagination settings here
 }
 
