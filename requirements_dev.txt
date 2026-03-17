@@ -1,0 +1,8 @@
+-r requirements.txt
+
+black
+django-stubs
+djangorestframework-stubs
+mypy
+ipython
+django-extensions
