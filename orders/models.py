@@ -40,3 +40,8 @@ class OrderItem(models.Model):
     class Meta:
         verbose_name = "OrderItem"
         verbose_name_plural = "OrderItems"
+        constraints = [
+            models.UniqueConstraint(
+                fields=["order", "product"], name="unique_order_item"
+            )
+        ]
