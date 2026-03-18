@@ -1,12 +1,6 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.text import slugify
-from rest_framework import serializers
-
-
-def validate_price(value):
-    if value <= 0:
-        raise serializers.ValidationError("Price must be greater than 0")
-    return value
 
 
 class Category(models.Model):
@@ -33,7 +27,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(blank=True, unique=True)
     price = models.DecimalField(
-        max_digits=10, decimal_places=2, validators=[validate_price]
+        max_digits=10, decimal_places=2, validators=[MinValueValidator(0)]
     )
     description = models.TextField(blank=True)
     stock = models.PositiveIntegerField()
