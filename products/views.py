@@ -8,7 +8,6 @@ from .serializers import (
 
 
 class ProductViewSet(ReadOnlyModelViewSet):
-    queryset = Product.objects.all().filter(is_active=True)
     lookup_field = "slug"
 
     def get_serializer_class(self):
@@ -17,7 +16,11 @@ class ProductViewSet(ReadOnlyModelViewSet):
         else:
             return ProductDetailSerializer
 
+    def get_queryset(self):
+        return Product.objects.all().filter(is_active=True).select_related("category")
+
 
 class CategoryViewSet(ReadOnlyModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    lookup_field = "slug"
