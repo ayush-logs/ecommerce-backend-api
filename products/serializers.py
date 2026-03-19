@@ -7,19 +7,21 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = [
             "name",
+            "slug",
             "description",
         ]
 
 
 class ProductListSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)
+    category = serializers.CharField(source="category.name", read_only=True)
 
     class Meta:
         model = Product
         fields = [
             "name",
+            "slug",
+            "description",
             "price",
-            "stock",
             "category",
         ]
 
@@ -31,8 +33,8 @@ class ProductDetailSerializer(serializers.ModelSerializer):
         model = Product
         fields = [
             "name",
-            "price",
+            "slug",
             "description",
-            "stock",
+            "price",
             "category",
         ]
