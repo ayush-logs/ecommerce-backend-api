@@ -8,12 +8,13 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ["id", "name", "slug", "description", "created_at"]
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ["name", "description"]
-    ordering = ["name"]
+    ordering = ["id"]
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = [
+        "id",
         "name",
         "slug",
         "price",
@@ -28,4 +29,4 @@ class ProductAdmin(admin.ModelAdmin):
         "category",
     ]
     search_fields = ["name", "description"]
-    ordering = ["name"]
+    ordering = ["id"]
