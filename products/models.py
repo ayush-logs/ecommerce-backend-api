@@ -32,7 +32,9 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     stock = models.PositiveIntegerField()
     is_active = models.BooleanField(default=True)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    category = models.ForeignKey(
+        Category, on_delete=models.PROTECT, related_name="products"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -48,3 +50,5 @@ class Product(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
+    # TODO implement soft delete for products
