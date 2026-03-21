@@ -56,22 +56,30 @@ git clone https://github.com/ayush-logs/ecommerce-backend-api.git
 cd ecommerce-backend-api
 ```
 
-2. Install dependencies
+2. Create `.env` file in root directory
+```env
+DEBUG=True
+SECRET_KEY=any-local-secret-key
+ALLOWED_HOSTS=127.0.0.1,localhost
+DATABASE_URL=sqlite:///db.sqlite3
+```
+
+3. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Setup database
+4. Setup database
 ```bash
 python manage.py migrate
 ```
 
-4. Create superuser (optional)
+5. Create superuser (optional)
 ```bash
 python manage.py createsuperuser
 ```
 
-5. Run server
+6. Run server
 ```bash
 python manage.py runserver
 ```
