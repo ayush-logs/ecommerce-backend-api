@@ -15,11 +15,11 @@ REST API for e-commerce platform built with Django REST Framework.
 - PostgreSQL 
 - JWT Authentication
 
-[//]: # (## Live Demo)
+## Live Demo
 
-[//]: # (**API Base URL:** https://your-app.onrender.com/api/)
+**API Base URL:** https://ecommerce-backend-api-rhaq.onrender.com/api/
 
-[//]: # (**API Documentation:** https://your-app.onrender.com/api/schema/swagger/)
+**API Documentation:** https://ecommerce-backend-api-rhaq.onrender.com/schema/swagger/
 
 ## API Endpoints
 
@@ -35,14 +35,13 @@ REST API for e-commerce platform built with Django REST Framework.
 
 ### Categories
 - `GET /api/categories/` - List all categories
-- `GET /api/categories/{id}/` - Get category details
+- `GET /api/categories/{slug}/` - Get category details
 
 ### Cart
 - `GET /api/cart/` - Get current user's cart
 - `POST /api/cart/items/` - Add item to cart
 - `PATCH /api/cart/items/{id}/` - Update item quantity
 - `DELETE /api/cart/items/{id}/` - Remove item from cart
-- `DELETE /api/cart/clear/` - Clear cart
 
 ### Orders
 - `GET /api/orders/` - List user's orders
@@ -81,21 +80,21 @@ python manage.py runserver
 
 ### Register User
 ```bash
-curl -X POST https://your-app.onrender.com/api/auth/register/ \
+curl -X POST https://ecommerce-backend-api-rhaq.onrender.com/api/auth/register/ \
   -H "Content-Type: application/json" \
   -d '{"username": "testuser", "email": "test@example.com", "password": "securepass123"}'
 ```
 
 ### Login
 ```bash
-curl -X POST https://your-app.onrender.com/api/auth/login/ \
+curl -X POST https://ecommerce-backend-api-rhaq.onrender.com/api/auth/login/ \
   -H "Content-Type: application/json" \
   -d '{"username": "testuser", "password": "securepass123"}'
 ```
 
 ### Add Item to Cart
 ```bash
-curl -X POST https://your-app.onrender.com/api/cart/items/ \
+curl -X POST https://ecommerce-backend-api-rhaq.onrender.com/api/cart/items/ \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"product_id": 1, "quantity": 2}'
@@ -111,9 +110,17 @@ ALLOWED_HOSTS=your-domain.onrender.com
 
 ## Database Schema
 
-[Optional: Add ERD or describe models]
+- **User** — Django's built-in auth user
+- **Category** — Product categories with slug
+- **Product** — Belongs to category, has price and stock
+- **Cart** — One per user, created lazily on first item add
+- **CartItem** — Links cart to product with quantity
+- **Order** — Created from cart, stores status (Pending/Paid/Shipped/Delivered)
+- **OrderItem** — Snapshot of product, quantity and price at time of order
 
 ## Future Enhancements
+
+- Real Time Stock Update
 - Payment integration
 - Product search and filtering
 - Email notifications
