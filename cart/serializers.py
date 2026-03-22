@@ -3,14 +3,6 @@ from .models import Cart, CartItem
 from accounts.serializers import UserSerializer
 
 
-class CartSerializer(serializers.ModelSerializer):
-    user = serializers.CharField(source="user.username", read_only=True)
-
-    class Meta:
-        model = Cart
-        fields = ["id", "user"]
-
-
 class CartItemInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartItem
@@ -29,3 +21,12 @@ class CartItemUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartItem
         fields = ["quantity"]
+
+
+class CartSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(source="user.username", read_only=True)
+    cart_items = CartItemOutputSerializer(many=True, read_only=True, source="items")
+
+    class Meta:
+        model = Cart
+        fields = ["id", "user", "cart_items"]
