@@ -1,8 +1,10 @@
+from django.db.models import Prefetch
 from rest_framework import status
 from rest_framework.generics import (
     RetrieveAPIView,
     UpdateAPIView,
     DestroyAPIView,
+    ListAPIView,
 )
 from rest_framework.views import APIView
 from .models import CartItem, Cart
@@ -17,12 +19,11 @@ from rest_framework.response import Response
 from .services import add_item_to_cart
 
 
-class CartRetrieveView(RetrieveAPIView):
+class CartRetrieveView(ListAPIView):
     serializer_class = CartSerializer
 
-    def get_object(self):
-        cart, _ = Cart.objects.get_or_create(user=self.request.user)
-        return cart
+    def get_queryset(self):
+        return Cart.objects.filter(user=self.request.user).prefetch_related("items")
 
 
 # noinspection PyMethodMayBeStatic
