@@ -3,6 +3,8 @@ from django.core.exceptions import ValidationError
 
 from cart.models import Cart, CartItem
 from orders.models import Order, OrderItem
+from products.models import Product
+from django.db.models import F
 
 
 def create_order_from_cart(user):
@@ -32,6 +34,12 @@ def create_order_from_cart(user):
             )
 
         OrderItem.objects.bulk_create(order_items)
+
+        # decrement stock atomically
+        for item in cart_items:
+            Product.objects.filter(id=item.product_id).update(
+                stock=F("stock") - item.quantity
+            )
 
         cart.delete()
 

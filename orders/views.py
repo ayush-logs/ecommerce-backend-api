@@ -12,14 +12,11 @@ from .serializers import OrderDetailSerializer
 from .services import create_order_from_cart
 
 
-class OrderView(ListAPIView):
-    serializer_class = OrderListSerializer
+class OrderListCreateView(APIView):
+    def get(self, request, *args, **kwargs):
+        orders = Order.objects.filter(user=self.request.user)
+        return Response(OrderListSerializer(orders, many=True).data)
 
-    def get_queryset(self):
-        return Order.objects.filter(user=self.request.user)
-
-
-class OrderCreateView(APIView):
     def post(self, request, *args, **kwargs):
         order = create_order_from_cart(user=request.user)
         return Response(
