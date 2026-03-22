@@ -50,5 +50,3 @@ class Product(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
-
-    # TODO implement soft delete for products
