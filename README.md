@@ -66,7 +66,7 @@ DATABASE_URL=sqlite:///db.sqlite3
 
 3. Install dependencies
 ```bash
-pip install -r requirements.txt
+pip install -r base.txt
 ```
 
 4. Setup database
